@@ -34,6 +34,19 @@
   #cbf-root * { box-sizing: border-box; }
 
   /* ---- Login screen ---- */
+  #cbf-root[data-theme="dark"] {
+    --bg: #221f26;
+    --panel: #2c2832;
+    --panel-2: #262229;
+    --line: rgba(255,255,255,0.11);
+    --text: #ece6ea;
+    --text-dim: #ab9fab;
+    --accent: #d29fae;
+    --accent-soft: rgba(210,159,174,0.18);
+    --ok: #9dc098;
+    --warn: #dcb47f;
+  }
+
   .cbf-login-wrap {
     width: 100%;
     display: flex;
@@ -105,7 +118,12 @@
     display: flex;
     flex-direction: column;
     padding: 22px 16px;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    max-height: 100vh;
   }
+  .cbf-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; overflow-y: auto; min-height: 0; }
   .cbf-brand {
     display: flex;
     align-items: center;
@@ -126,6 +144,19 @@
     letter-spacing: 0.5px;
     color: var(--text);
   }
+
+  .cbf-theme-toggle {
+    background: none;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 5px 8px;
+    cursor: pointer;
+    font-size: 13px;
+    color: var(--text);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .cbf-theme-toggle:hover { border-color: var(--accent); }
 
   .cbf-account-row {
     display: flex;
@@ -168,13 +199,15 @@
   .cbf-btn:hover { border-color: var(--accent); color: var(--accent); }
   .cbf-btn.danger:hover { border-color: #b06060; color: #b06060; }
 
-  .cbf-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; overflow-y: auto; }
+  .cbf-nav {
+    display: flex; flex-direction: column; gap: 2px; flex: 1; overflow-y: auto;
+  }
   .cbf-nav-item {
     display: flex; align-items: center; gap: 10px;
     background: none; border: none; text-align: left;
-    padding: 9px 10px; border-radius: 10px; cursor: pointer;
-    font-size: 13px; color: var(--text);
-    opacity: 0.72;
+    padding: 10px 10px; border-radius: 10px; cursor: pointer;
+    font-size: 14.5px; color: var(--text);
+    opacity: 0.75;
     font-family: inherit;
   }
   .cbf-nav-item .dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
@@ -195,19 +228,19 @@
 
   .cbf-header-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 4px; }
   .cbf-header-dot { width: 11px; height: 11px; border-radius: 50%; }
-  .cbf-header-title { font-family: 'Noto Serif TC', serif; font-size: 19px; }
+  .cbf-header-title { font-family: 'Noto Serif TC', serif; font-size: 21px; font-weight: 600; }
   .cbf-section-note {
-    font-size: 12.5px; color: var(--text-dim); margin: 6px 0 20px 0; line-height: 1.7;
+    font-size: 13.5px; color: var(--text-dim); margin: 6px 0 20px 0; line-height: 1.75;
   }
 
   .cbf-field { margin-bottom: 22px; }
   .cbf-field-label {
-    font-size: 13.5px; font-weight: 600; margin-bottom: 5px;
+    font-size: 15px; font-weight: 600; margin-bottom: 5px;
     display: flex; align-items: baseline; gap: 5px; color: var(--text);
   }
   .cbf-field-label .req { color: var(--accent); }
-  .cbf-field-label .optional { color: var(--text-dim); font-weight: 400; font-size: 11.5px; }
-  .cbf-field-hint { font-size: 12px; color: var(--text-dim); margin-bottom: 8px; line-height: 1.65; }
+  .cbf-field-label .optional { color: var(--text-dim); font-weight: 400; font-size: 12.5px; }
+  .cbf-field-hint { font-size: 13.5px; color: var(--text-dim); margin-bottom: 8px; line-height: 1.7; }
 
   .cbf-input, .cbf-textarea, select.cbf-input {
     width: 100%;
@@ -215,16 +248,17 @@
     border: 1px solid var(--line);
     border-radius: 11px;
     color: var(--text);
-    padding: 11px 13px;
-    font-size: 13.5px;
+    padding: 12px 14px;
+    font-size: 15.5px;
+    font-weight: 500;
     font-family: inherit;
     resize: vertical;
     box-shadow: 0 1px 2px rgba(74,65,74,0.04);
   }
   .cbf-input:focus, .cbf-textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-  .cbf-textarea { min-height: 92px; line-height: 1.75; }
+  .cbf-textarea { min-height: 92px; line-height: 1.85; }
   .cbf-textarea.tall { min-height: 160px; }
-  .cbf-counter { text-align: right; font-size: 11px; color: var(--text-dim); margin-top: 4px; }
+  .cbf-counter { text-align: right; font-size: 12.5px; color: var(--text-dim); margin-top: 4px; }
   .cbf-counter.over { color: var(--accent); font-weight: 700; }
 
   .cbf-radio-row { display: flex; gap: 20px; margin-top: 4px; }
@@ -285,7 +319,7 @@
 
   @media (max-width: 780px) {
     #cbf-root { flex-direction: column; min-height: unset; border-radius: 14px; }
-    .cbf-sidebar { width: 100%; padding: 14px 14px 10px 14px; }
+    .cbf-sidebar { width: 100%; padding: 14px 14px 10px 14px; max-height: none; }
     .cbf-brand { padding-bottom: 10px; margin-bottom: 10px; }
     .cbf-char-block { margin-bottom: 10px; }
     .cbf-nav {
@@ -334,6 +368,7 @@
     <div class="cbf-brand">
       <span class="dots"><span style="background:var(--dot-profile)"></span><span style="background:var(--dot-basic)"></span><span style="background:var(--dot-events)"></span></span>
       <span class="cbf-brand-title">角色後台填寫台</span>
+      <button class="cbf-theme-toggle" id="cbf-theme-toggle" title="切換亮/暗模式">☾</button>
     </div>
     <div class="cbf-account-row">
       <span id="cbf-account-email"></span>
@@ -455,6 +490,28 @@ let showExport = false;
 let currentData = null;
 let saveTimer = null;
 
+function applyTheme(theme) {
+  const root = document.getElementById("cbf-root");
+  const btn = document.getElementById("cbf-theme-toggle");
+  if (theme === "dark") {
+    root.setAttribute("data-theme", "dark");
+    btn.textContent = "☀";
+  } else {
+    root.removeAttribute("data-theme");
+    btn.textContent = "☾";
+  }
+  try { localStorage.setItem("cbf-theme", theme); } catch (e) {}
+}
+(function initTheme() {
+  let saved = "light";
+  try { saved = localStorage.getItem("cbf-theme") || "light"; } catch (e) {}
+  applyTheme(saved);
+})();
+document.getElementById("cbf-theme-toggle").addEventListener("click", () => {
+  const isDark = document.getElementById("cbf-root").getAttribute("data-theme") === "dark";
+  applyTheme(isDark ? "light" : "dark");
+});
+
 function userDocRef(...segments) {
   return doc(dbFs, "users", currentUser.uid, ...segments);
 }
@@ -516,9 +573,10 @@ function markSaving() {
   }, 500);
 }
 
-function counter(current, max) {
+function counter(current, max, id) {
   const over = current > max;
-  return `<div class="cbf-counter ${over ? 'over' : ''}">${current}/${max}</div>`;
+  const idAttr = id ? ` id="${id}-counter"` : "";
+  return `<div class="cbf-counter ${over ? 'over' : ''}"${idAttr}>${current}/${max}</div>`;
 }
 function field(label, opts, inner) {
   const req = opts.req ? '<span class="req">*</span>' : (opts.optional !== false ? '<span class="optional">(選擇性)</span>' : '');
@@ -688,13 +746,13 @@ function renderBody() {
         <option ${d.profile.nativeLang==="English"?"selected":""}>English</option>
         <option ${d.profile.nativeLang==="日本語"?"selected":""}>日本語</option>
       </select>`);
-    html += field("姓名", {req:true, optional:false}, `<input class="cbf-input" id="f-name" maxlength="30" value="${escapeAttr(d.profile.name)}">` + counter(d.profile.name.length, 15));
-    html += field("年齡", {req:true, optional:false}, `<input class="cbf-input" id="f-age" maxlength="30" value="${escapeAttr(d.profile.age)}">` + counter(d.profile.age.length, 15));
-    html += field("職業", {req:true, optional:false}, `<input class="cbf-input" id="f-job" maxlength="30" value="${escapeAttr(d.profile.job)}">` + counter(d.profile.job.length, 15));
-    html += field("來自角色的一句話", {req:true, optional:false}, `<input class="cbf-input" id="f-quote" maxlength="120" value="${escapeAttr(d.profile.quote)}">` + counter(d.profile.quote.length, 80));
-    html += field("敘述", {optional:true, hint:"角色詳情頁的前導文字，玩家開聊前可讀取。"}, `<textarea class="cbf-textarea tall" id="f-narration" maxlength="900">${escapeHtml(d.profile.narration)}</textarea>` + counter(d.profile.narration.length, 700));
+    html += field("姓名", {req:true, optional:false}, `<input class="cbf-input" id="f-name" maxlength="30" value="${escapeAttr(d.profile.name)}">` + counter(d.profile.name.length, 15, "f-name"));
+    html += field("年齡", {req:true, optional:false}, `<input class="cbf-input" id="f-age" maxlength="30" value="${escapeAttr(d.profile.age)}">` + counter(d.profile.age.length, 15, "f-age"));
+    html += field("職業", {req:true, optional:false}, `<input class="cbf-input" id="f-job" maxlength="30" value="${escapeAttr(d.profile.job)}">` + counter(d.profile.job.length, 15, "f-job"));
+    html += field("來自角色的一句話", {req:true, optional:false}, `<input class="cbf-input" id="f-quote" maxlength="120" value="${escapeAttr(d.profile.quote)}">` + counter(d.profile.quote.length, 80, "f-quote"));
+    html += field("敘述", {optional:true, hint:"角色詳情頁的前導文字，玩家開聊前可讀取。"}, `<textarea class="cbf-textarea tall" id="f-narration" maxlength="900">${escapeHtml(d.profile.narration)}</textarea>` + counter(d.profile.narration.length, 700, "f-narration"));
     html += field("標籤", {optional:true}, renderTags());
-    html += field("創作者筆記", {optional:true}, `<textarea class="cbf-textarea" id="f-creatorNote" maxlength="250">${escapeHtml(d.profile.creatorNote)}</textarea>` + counter(d.profile.creatorNote.length, 200));
+    html += field("創作者筆記", {optional:true}, `<textarea class="cbf-textarea" id="f-creatorNote" maxlength="250">${escapeHtml(d.profile.creatorNote)}</textarea>` + counter(d.profile.creatorNote.length, 200, "f-creatorNote"));
   }
 
   if (activeTab === "basic") {
@@ -705,22 +763,22 @@ function renderBody() {
         <label><input type="radio" name="gender" value="女" ${d.basic.gender==="女"?"checked":""}> 女</label>
         <label><input type="radio" name="gender" value="未設置" ${d.basic.gender==="未設置"?"checked":""}> 未設置</label>
       </div></div>`;
-    html += field("基本資訊", {req:true, optional:false, hint:"請輸入背景、家庭、MBTI、身高等"}, `<textarea class="cbf-textarea tall" id="f-info" maxlength="900">${escapeHtml(d.basic.info)}</textarea>` + counter(d.basic.info.length, 700));
-    html += field("性格", {req:true, optional:false}, `<textarea class="cbf-textarea tall" id="f-personality" maxlength="900">${escapeHtml(d.basic.personality)}</textarea>` + counter(d.basic.personality.length, 700));
-    html += field("說話風格與習慣", {req:true, optional:false}, `<textarea class="cbf-textarea tall" id="f-speech" maxlength="900">${escapeHtml(d.basic.speech)}</textarea>` + counter(d.basic.speech.length, 700));
+    html += field("基本資訊", {req:true, optional:false, hint:"請輸入背景、家庭、MBTI、身高等"}, `<textarea class="cbf-textarea tall" id="f-info" maxlength="900">${escapeHtml(d.basic.info)}</textarea>` + counter(d.basic.info.length, 700, "f-info"));
+    html += field("性格", {req:true, optional:false}, `<textarea class="cbf-textarea tall" id="f-personality" maxlength="900">${escapeHtml(d.basic.personality)}</textarea>` + counter(d.basic.personality.length, 700, "f-personality"));
+    html += field("說話風格與習慣", {req:true, optional:false}, `<textarea class="cbf-textarea tall" id="f-speech" maxlength="900">${escapeHtml(d.basic.speech)}</textarea>` + counter(d.basic.speech.length, 700, "f-speech"));
   }
 
   if (activeTab === "firstScene") {
     html += `<div class="cbf-section-note">設定第一個場景後，聊天開始時會套用該情境。公開角色並設定第一個場景後，將顯示在推薦畫面上。</div>`;
-    html += field("情境腳本", {optional:true, hint:"例）睡前，角色因無聊而主動發訊息的情況"}, `<textarea class="cbf-textarea tall" id="f-scenario" maxlength="900">${escapeHtml(d.firstScene.scenario)}</textarea>` + counter(d.firstScene.scenario.length, 800));
-    html += field("角色對話", {optional:true, hint:"例）以後收到我的訊息後，請在3秒內回覆"}, `<textarea class="cbf-textarea tall" id="f-dialogue" maxlength="900">${escapeHtml(d.firstScene.dialogue)}</textarea>` + counter(d.firstScene.dialogue.length, 800));
+    html += field("情境腳本", {optional:true, hint:"例）睡前，角色因無聊而主動發訊息的情況"}, `<textarea class="cbf-textarea tall" id="f-scenario" maxlength="900">${escapeHtml(d.firstScene.scenario)}</textarea>` + counter(d.firstScene.scenario.length, 800, "f-scenario"));
+    html += field("角色對話", {optional:true, hint:"例）以後收到我的訊息後，請在3秒內回覆"}, `<textarea class="cbf-textarea tall" id="f-dialogue" maxlength="900">${escapeHtml(d.firstScene.dialogue)}</textarea>` + counter(d.firstScene.dialogue.length, 800, "f-dialogue"));
     html += field("背景圖片", {optional:true, hint:"建議使用 9:16 比例的圖片。若未上傳，角色個人資料圖片將作為背景。此工具不處理圖片上傳。"}, `<div class="cbf-field-hint">請直接在卿卿我我後台上傳。</div>`);
   }
 
   if (activeTab === "details") {
     html += `<div class="cbf-section-note">若您希望在基本設定外填寫詳細內容，請在此編寫。</div>`;
-    html += field("喜歡", {optional:true}, `<input class="cbf-input" id="f-likes" maxlength="80" value="${escapeAttr(d.details.likes)}">` + counter(d.details.likes.length, 50));
-    html += field("不喜歡", {optional:true}, `<input class="cbf-input" id="f-dislikes" maxlength="80" value="${escapeAttr(d.details.dislikes)}">` + counter(d.details.dislikes.length, 50));
+    html += field("喜歡", {optional:true}, `<input class="cbf-input" id="f-likes" maxlength="80" value="${escapeAttr(d.details.likes)}">` + counter(d.details.likes.length, 50, "f-likes"));
+    html += field("不喜歡", {optional:true}, `<input class="cbf-input" id="f-dislikes" maxlength="80" value="${escapeAttr(d.details.dislikes)}">` + counter(d.details.dislikes.length, 50, "f-dislikes"));
     html += field("生日", {optional:true}, `<input class="cbf-input" id="f-birthday" placeholder="YYYY-MM-DD" value="${escapeAttr(d.details.birthday)}">`);
     html += `<div class="cbf-field"><div class="cbf-field-label">附加資訊 <span class="optional">(${d.details.extras.length}/10)</span></div>`;
     d.details.extras.forEach((ex, i) => {
@@ -758,7 +816,7 @@ function renderBody() {
     html += `<div class="cbf-section-note">可管理序章故事與遊玩過程中解鎖的故事。</div>`;
     html += `<div class="cbf-tier-group"><div class="cbf-tier-heading" style="color:var(--text)"><span class="tdot" style="background:var(--dot-first)"></span>序章（玩家開聊前可直接閱讀）</div>`;
     html += field("序章標題", {optional:true}, `<input class="cbf-input" id="f-prologueTitle" maxlength="40" value="${escapeAttr(d.stories.prologueTitle)}">`);
-    html += field("序章內容", {optional:true}, `<textarea class="cbf-textarea tall" id="f-prologueContent" maxlength="2100">${escapeHtml(d.stories.prologueContent)}</textarea>` + counter(d.stories.prologueContent.length, 2000));
+    html += field("序章內容", {optional:true}, `<textarea class="cbf-textarea tall" id="f-prologueContent" maxlength="2100">${escapeHtml(d.stories.prologueContent)}</textarea>` + counter(d.stories.prologueContent.length, 2000, "f-prologueContent"));
     html += `</div>`;
 
     html += `<div class="cbf-tier-group"><div class="cbf-tier-heading"><span class="tdot"></span>好感度解鎖故事</div>`;
